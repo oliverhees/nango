@@ -44,7 +44,10 @@ services:
             - NANGO_LOGS_ES_PWD
             - FLAG_SERVE_CONNECT_UI=${FLAG_SERVE_CONNECT_UI:-true}
         volumes:
-            # - ... anderen Volumes beibehalten
+           - "nango_data:/usr/nango-server"        # Einfache Liste
+           - type: bind                            # Liste mit Objekt
+             source: ./packages/providers
+             target: /usr/nango-server/src/packages/providers
         restart: always
         ports:
             - '${SERVER_PORT:-3003}:${SERVER_PORT:-3003}'
